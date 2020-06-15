@@ -1,0 +1,1 @@
+exports.updateProfileValidator = require('./update-profile');

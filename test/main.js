@@ -1,0 +1,12 @@
+require('./controllers/Account');
+require('./controllers/Organization');
+require('./controllers/FundingSource');
+require('./controllers/Subscription');
+require('./controllers/User');
+require('./controllers/Workspace');
+require('./controllers/Channel');
+require('./controllers/Rules');
+require('./controllers/Functions');
+require('./controllers/Variables');
+require('./controllers/PollingJob');
+require('./controllers/WorkspaceAdmin');

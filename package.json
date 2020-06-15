@@ -1,0 +1,35 @@
+{
+  "name": "backbase-api",
+  "version": "0.1.0",
+  "description": "Backbase backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "SET NODE_ENV=test&& mocha --ignore test/cleardb.js& node test/cleardb.js"
+  },
+  "keywords": [
+    "backbase"
+  ],
+  "author": "Samwul",
+  "license": "ISC",
+  "dependencies": {
+    "@sentry/node": "^5.15.5",
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "cloudinary": "^1.21.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6",
+    "express-validation": "^3.0.2",
+    "joi-objectid": "^3.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.5.5",
+    "parse-duration": "^0.3.3",
+    "plaid": "^4.11.0",
+    "redis": "^3.0.2",
+    "stripe": "^8.47.0",
+    "uuid": "^7.0.3"
+  },
+  "devDependencies": {
+    "mocha": "^7.1.1"
+  }
+}
