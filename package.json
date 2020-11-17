@@ -4,7 +4,8 @@
   "description": "Backbase backend",
   "main": "index.js",
   "scripts": {
-    "test": "SET NODE_ENV=test&& mocha --ignore test/cleardb.js& node test/cleardb.js"
+    "test": "SET NODE_ENV=test&& mocha --ignore test/cleardb.js& node test/cleardb.js",
+    "start": "node app/server.js"
   },
   "keywords": [
     "backbase"
