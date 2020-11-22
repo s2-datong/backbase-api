@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hookman-dashboard-api
+  labels:
+    app: backend
+    type: api
+    project: dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+      type: api
+      project: dashboard
+  template:
+    metadata:
+      labels:
+        app: backend
+        type: api
+        project: dashboard
+    spec:
+      containers:
+      - name: hookman-dashboard-api-container
+        image: registry.digitalocean.com/hookman-registry/hookman-dashboard-api
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: POSTGRES_HOST
+          valueFrom:
+            secretKeyRef:
+              name: hookman-secret
+              key: postgres.host
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: hookman-secret
+              key: postgres.username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: hookman-secret
+              key: postgres.password
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: hookman-secret
+              key: postgres.database
+        - name: POSTGRES_PORT
+          valueFrom:
+            secretKeyRef:
+              name: hookman-secret
+              key: postgres.port
+        - name: PAYSTACK_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: hookman-secret
+              key: paystack.secret_key
+        - name: PAYSTACK_PUBLIC
+          valueFrom:
+            secretKeyRef:
+              name: hookman-secret
+              key: paystack.public_key
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: hookman-secret
+              key: redis.host
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: hookman-secret
+              key: redis.password
+        - name: REDIS_CORE_CHANNEL
+          valueFrom:
+            secretKeyRef:
+              name: hookman-secret
+              key: redis.core_channel
+        - name: EMAIL_SERVICE
+          valueFrom:
+            secretKeyRef:
+              name: hookman-secret
+              key: hookman.email_service
+        ports:
+        - containerPort: 3000
+      imagePullSecrets:
+      - name: registry-hookman-registry
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hookman-dashboard-api-service
+spec:
+  selector:
+    app: backend
+    type: api
+    project: dashboard
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

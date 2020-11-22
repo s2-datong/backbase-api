@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: dashboard-api-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: backend.hookman.ng
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: hookman-dashboard-api-service
+          servicePort: 80

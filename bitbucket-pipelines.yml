@@ -1,0 +1,51 @@
+# This is a sample build configuration for Docker.
+# Check our guides at https://confluence.atlassian.com/x/O1toN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: samwul/hookman-base:1.0.0
+
+pipelines:
+  branches:
+    dev:
+      - step:
+          services:
+            - docker
+          script: # Modify the commands below to build your repository.
+            # Set $DOCKER_HUB_USERNAME and $DOCKER_HUB_PASSWORD as environment variables in repository settings
+            - export IMAGE_NAME=registry.digitalocean.com/hookman-registry/hookman-dashboard-api:$BITBUCKET_COMMIT
+
+            # build the Docker image (this will use the Dockerfile in the root of the repo)
+            - docker build -t $IMAGE_NAME .
+            # push the new Docker image to the Docker registry
+            - docker push $IMAGE_NAME
+
+            - kubectl config set-credentials cluster-admin --token=$DO_CLUSTER_TOKEN
+            - kubectl config set-cluster hookman-cluster --server=$DO_CLUSTER_HOST --insecure-skip-tls-verify=true
+            - kubectl config set-context hookman-cluster-context --cluster=hookman-cluster --user=cluster-admin
+            - kubectl config use-context hookman-cluster-context
+
+            - sed -i.bak "s#registry.digitalocean.com/hookman-registry/hookman-dashboard-api#$IMAGE_NAME#" deployment/staging.yaml
+            - kubectl apply -n staging -f deployment/staging.yaml
+            - kubectl apply -n staging -f deployment/ingress/staging.yaml
+    master:
+      - step:
+          services:
+            - docker
+          script: # Modify the commands below to build your repository.
+            # Set $DOCKER_HUB_USERNAME and $DOCKER_HUB_PASSWORD as environment variables in repository settings
+            - export IMAGE_NAME=registry.digitalocean.com/hookman-registry/hookman-dashboard-api:$BITBUCKET_COMMIT
+
+            # build the Docker image (this will use the Dockerfile in the root of the repo)
+            - docker build -t $IMAGE_NAME .
+            # push the new Docker image to the Docker registry
+            - docker push $IMAGE_NAME
+
+            - kubectl config set-credentials cluster-admin --token=$DO_CLUSTER_TOKEN
+            - kubectl config set-cluster hookman-cluster --server=$DO_CLUSTER_HOST --insecure-skip-tls-verify=true
+            - kubectl config set-context hookman-cluster-context --cluster=hookman-cluster --user=cluster-admin
+            - kubectl config use-context hookman-cluster-context
+
+            - sed -i.bak "s#registry.digitalocean.com/hookman-registry/hookman-dashboard-api#$IMAGE_NAME#" deployment/production.yaml
+            - kubectl apply -n production -f deployment/production.yaml
+            - kubectl apply -n production -f deployment/ingress/production.yaml
