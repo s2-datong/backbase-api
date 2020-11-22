@@ -1,17 +1,17 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: dashboard-api-ingress
-  namespace: staging
+  name: backbase-api-ingress
+  namespace: backbase-staging
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: backend.staging.hookman.ng
+  - host: backend.staging.backbase.co
     http:
       paths:
       - path: /
         backend:
-          serviceName: hookman-dashboard-api-service
+          serviceName: backbase-api-service
           servicePort: 80

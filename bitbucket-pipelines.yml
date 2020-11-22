@@ -13,7 +13,7 @@ pipelines:
             - docker
           script: # Modify the commands below to build your repository.
             # Set $DOCKER_HUB_USERNAME and $DOCKER_HUB_PASSWORD as environment variables in repository settings
-            - export IMAGE_NAME=registry.digitalocean.com/hookman-registry/hookman-dashboard-api:$BITBUCKET_COMMIT
+            - export IMAGE_NAME=registry.digitalocean.com/hookman-registry/backbase-dashboard-api:$BITBUCKET_COMMIT
 
             # build the Docker image (this will use the Dockerfile in the root of the repo)
             - docker build -t $IMAGE_NAME .
@@ -25,16 +25,16 @@ pipelines:
             - kubectl config set-context hookman-cluster-context --cluster=hookman-cluster --user=cluster-admin
             - kubectl config use-context hookman-cluster-context
 
-            - sed -i.bak "s#registry.digitalocean.com/hookman-registry/hookman-dashboard-api#$IMAGE_NAME#" deployment/staging.yaml
-            - kubectl apply -n staging -f deployment/staging.yaml
-            - kubectl apply -n staging -f deployment/ingress/staging.yaml
+            - sed -i.bak "s#registry.digitalocean.com/hookman-registry/backbase-dashboard-api#$IMAGE_NAME#" deployment/staging.yaml
+            - kubectl apply -n backbase-staging -f deployment/staging.yaml
+            - kubectl apply -n backbase-staging -f deployment/ingress/staging.yaml
     master:
       - step:
           services:
             - docker
           script: # Modify the commands below to build your repository.
             # Set $DOCKER_HUB_USERNAME and $DOCKER_HUB_PASSWORD as environment variables in repository settings
-            - export IMAGE_NAME=registry.digitalocean.com/hookman-registry/hookman-dashboard-api:$BITBUCKET_COMMIT
+            - export IMAGE_NAME=registry.digitalocean.com/hookman-registry/backbase-dashboard-api:$BITBUCKET_COMMIT
 
             # build the Docker image (this will use the Dockerfile in the root of the repo)
             - docker build -t $IMAGE_NAME .
@@ -46,6 +46,6 @@ pipelines:
             - kubectl config set-context hookman-cluster-context --cluster=hookman-cluster --user=cluster-admin
             - kubectl config use-context hookman-cluster-context
 
-            - sed -i.bak "s#registry.digitalocean.com/hookman-registry/hookman-dashboard-api#$IMAGE_NAME#" deployment/production.yaml
-            - kubectl apply -n production -f deployment/production.yaml
-            - kubectl apply -n production -f deployment/ingress/production.yaml
+            - sed -i.bak "s#registry.digitalocean.com/hookman-registry/backbase-dashboard-api#$IMAGE_NAME#" deployment/production.yaml
+            - kubectl apply -n backbase-production -f deployment/production.yaml
+            - kubectl apply -n backbase-production -f deployment/ingress/production.yaml
