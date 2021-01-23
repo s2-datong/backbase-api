@@ -1,5 +1,11 @@
 const redis = require("redis");
-const client = redis.createClient();
+const config = require('../../config');
+
+const client = redis.createClient({
+    host: config.service.redis.url,
+    password: config.service.redis.password,
+    db: 2
+});
 const util = require('util');
 client.on('error', (e) => {
     if(e.code && e.code === "ECONNREFUSED"){

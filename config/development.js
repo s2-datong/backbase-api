@@ -70,6 +70,10 @@ module.exports = {
         },
         job_scheduler: {
             url: process.env.JOB_SCHEDULER_SERVICE || 'http://localhost:3000'
+        },
+        redis: {
+            url: process.env.REDIS_URL,
+            password: process.env.REDIS_PASSWORD
         }
     }
 };
