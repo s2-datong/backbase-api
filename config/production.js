@@ -2,8 +2,8 @@ const plaidENVs = require('plaid').environments;
 module.exports = {
     db:{
         mongo:{
-            url: 'mongodb://localhost:27017/BACKBASE',
-            db_name: 'BACKBASE'
+            url: `mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOST}:${process.env.MONGODB_PORT}/${process.env.MONGODB_DB}`,
+            db_name: process.env.MONGODB_DB
         }
     },
     app: {
@@ -13,11 +13,11 @@ module.exports = {
             days_token_valid: 2
         },
         jwt: {
-            secret: 'wewq8738743kj',
-            expires: '7d'
+            secret: process.env.JWT_SECRET || 'wewq8738743kj',
+            expires: process.env.JWT_EXPIRES || '7d'
         },
-        max_invite_emails: 10,
-        free_users: 2,
+        max_invite_emails: process.env.MAX_EMAIL_INVITES || 10,
+        free_users: process.env.FREE_USERS || 2,
         backbase_org: {
             public_key: '940a9c43-34da-4f08-97bb-dec2ca714448',
             secret_key: '6a0c57ef-16ee-46bd-9bb4-feef15088a27',
@@ -32,7 +32,7 @@ module.exports = {
     },
     service: {
         email: {
-            url: 'http://127.0.0.1:3001'
+            url: process.env.EMAIL_SERVICE || 'http://127.0.0.1:3001'
         },
         storage:{
             cloudinary: {
@@ -62,16 +62,16 @@ module.exports = {
             naira_price: 10000
         },
         billing: {
-            url: 'http://localhost:3800'
+            url: process.env.BILLING_SERVICE || 'http://localhost:3800'
         },
         events: {
-            url: 'http://localhost:5700'
+            url: process.env.EVENTS_SERVICE || 'http://localhost:5700'
         },
         sentry: {
-            dsn: ''
+            dsn: 'https://45b537fe5fa644c89a2ad6e674add5c3@o509731.ingest.sentry.io/5604660'
         },
         job_scheduler: {
-            url: 'http://localhost:3000'
+            url: process.env.JOB_SCHEDULER_SERVICE || 'http://localhost:3000'
         }
     }
 };

@@ -27,11 +27,53 @@ spec:
         env:
         - name: NODE_ENV
           value: "production"
-        - name: POSTGRES_HOST
+        - name: REDIS_URL
           valueFrom:
             secretKeyRef:
-              name: hookman-secret
-              key: postgres.host
+              name: backbase-secret
+              key: redis.host
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: redis.password
+        - name: AMQP_URL
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: rabbitmq.host
+        - name: AMQP_USER
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: rabbitmq.username
+        - name: AMQP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: rabbitmq.password
+        - name: MONGODB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: mongodb.url
+        - name: MONGODB_USER
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: mongodb.username
+        - name: MONGODB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: mongodb.password
+        - name: MONGODB_PORT
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: mongodb.port
+        - name: MONGODB_DB
+          value: "BACKBASE_DB"
         ports:
         - containerPort: 3000
       imagePullSecrets:
