@@ -5,6 +5,7 @@ let client = null;
 let db = null;
 
 exports.setupDB = async function setup(){
+    console.log(config.db.mongo.url);
     try{
         client = new MongoClient(config.db.mongo.url, {useNewUrlParser: true, useUnifiedTopology: true});
         await client.connect();
