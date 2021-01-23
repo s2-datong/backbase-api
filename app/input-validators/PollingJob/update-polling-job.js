@@ -12,7 +12,7 @@ const updatePollingJobValidation = {
         hashSecret: Joi.string().required().optional(),
         channelId: Joi.string().optional(),
         interval: Joi.string().required(),
-        queue: joi.string().valid('stream','simple').required()
+        queue: Joi.string().valid('stream','simple').required()
     })
   };
 

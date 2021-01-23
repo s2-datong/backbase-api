@@ -11,7 +11,7 @@ const createPollingJobValidation = {
       hashSecret: Joi.string().required(),
       channelId: Joi.objectId(),
       interval: Joi.string().required(),
-      queue: joi.string().valid('stream','simple').required()
+      queue: Joi.string().valid('stream','simple').required()
     })
   };
 
