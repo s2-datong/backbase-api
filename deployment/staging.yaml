@@ -73,7 +73,7 @@ spec:
               name: backbase-secret
               key: mongodb.port
         - name: MONGODB_DB
-          value: "BACKBASE_DB"
+          value: "BACKBASE_DB_STAGING"
         ports:
         - containerPort: 3000
       imagePullSecrets:

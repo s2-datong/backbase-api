@@ -145,6 +145,8 @@ class Subscription {
             let channel = '';
             if(current_subscription.subscription_id === 'enterprise') channel = "downgrade_from_enterprise";
             if(current_subscription.subscription_id === 'standard') channel = "downgrade_from_standard";
+            // Custom downgrade channel is expected to be created with custom subscription
+            if(org_subscription.scoped_to_organization === true) channel = `downgrade_from_${current_subscription.subscription_id}`;
             // you cannot downgrade from startup to free, you need to cancel your subscription to do that
             
             // run business rules on downgrade action
@@ -211,10 +213,12 @@ class Subscription {
 
         const orgColl = await getCollection(DB_ORG);
         const subColl = await getCollection(DB_SUBSCRIPTION);
+        const availableSubColl = await getCollection(DB_AVAILABLE_SUBSCRIPTIONS);
         const org_id = user.organization.toString();
 
         const organization = await orgColl.findOne({_id: user.organization});
         const current_subscription = await subColl.findOne({organization: organization._id});
+        const org_subscription = await availableSubColl.findOne({_id: current_subscription.subscription_id});
         if(current_subscription.subscription_id === 'free') throw new ApplicationError("You cannot cancel a free subscription plan");
 
         // cancellation is always a downgrade
@@ -227,6 +231,8 @@ class Subscription {
         if(current_subscription.subscription_id === 'enterprise') channel = "downgrade_from_enterprise";
         if(current_subscription.subscription_id === 'standard') channel = "downgrade_from_standard";
         if(current_subscription.subscription_id === 'startup') channel = "downgrade_from_startup";
+        // Custom downgrade channel is expected to be created with custom subscription
+        if(org_subscription.scoped_to_organization === true) channel = `downgrade_from_${current_subscription.subscription_id}`;
 
         if(channel !== ''){
             payload.channel = channel;

@@ -21,8 +21,8 @@ const PaymentRouter = require('./routes/FundingSource').Router;
 const PollingJobRouter = require('./routes/PollingJob').Router;
 const HealthRouter = require('./routes/Health').Router;
 
-//const sentry = require('@sentry/node');
-//sentry.init({dsn: config.service.sentry.dsn});
+const sentry = require('@sentry/node');
+sentry.init({dsn: config.service.sentry.dsn});
 
 const app = express();
 app.use(cors())
@@ -52,7 +52,7 @@ app.use(function(err, req, res, next) {
     }
 
     console.error(err);
-    //sentry.captureException(err);
+    sentry.captureException(err);
     return res.status(500).write("Internal server error").end();
 });
 

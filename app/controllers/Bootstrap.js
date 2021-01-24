@@ -170,7 +170,8 @@ class Bootstrap{
                 scoped_to_organization: false,
                 amount: 0,
                 currency: 'USD',
-                interval: 'monthly'
+                interval: 'monthly',
+                usage_based: false
             },
 
             // STARTUP PLAN
@@ -182,7 +183,8 @@ class Bootstrap{
                 scoped_to_organization: false,
                 amount: 20,
                 currency: 'USD',
-                interval: 'monthly'
+                interval: 'monthly',
+                usage_based: false
             },
 
             // STANDARD PLAN
@@ -194,7 +196,8 @@ class Bootstrap{
                 scoped_to_organization: false,
                 amount: 100,
                 currency: 'USD',
-                interval: 'monthly'
+                interval: 'monthly',
+                usage_based: false
             },
 
             // ENTERPRISE PLAN
@@ -207,7 +210,7 @@ class Bootstrap{
                 amount: 500,
                 currency: 'USD',
                 interval: 'monthly',
-                usage_based: false,
+                usage_based: false
             },
 
             // USER PLAN
