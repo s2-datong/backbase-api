@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const expressfileupload = require('express-fileupload');
 const config = require('../config');
+const {setupDB} = require('./db');
 
 const {ApplicationError} = require('./exceptions');
 const {ValidationError} = require('express-validation');
@@ -55,7 +56,11 @@ app.use(function(err, req, res, next) {
     sentry.captureException(err);
     return res.status(500).write("Internal server error").end();
 });
-
-app.listen(3000, () => {
-    console.log('server listening on 3000')
-});
+setupDB().then(() => {
+    app.listen(3000, () => {
+        console.log('server listening on 3000')
+    });
+})
+.catch(e => {
+    console.log(e);
+})
