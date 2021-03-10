@@ -74,6 +74,81 @@ spec:
               key: mongodb.port
         - name: MONGODB_DB
           value: "BACKBASE_DB"
+        - name: CLOUDINARY_CLOUD_NAME
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: cloudinary.cloud_name
+        - name: CLOUDINARY_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: cloudinary.api_key
+        - name: CLOUDINARY_API_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: cloudinary.api_secret
+        - name: STRIPE_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: stripe.secret_key
+        - name: STRIPE_PUBLIC_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: stripe.public_key
+        - name: PAYSTACK_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: paystack.secret_key
+        - name: PAYSTACK_PUBLIC_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: paystack.public_key
+        - name: PLAID_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: plaid.client_id
+        - name: PLAID_PUBLIC_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: plaid.public_key
+        - name: PLAID_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: plaid.secret
+        - name: SENTRY_DSN
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: sentry.dsn
+        - name: EMAIL_SERVICE
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: email.service
+        - name: BILLING_SERVICE
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: billing.service
+        - name: EVENTS_SERVICE
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: events.service
+        - name: JOB_SCHEDULER_SERVICE
+          valueFrom:
+            secretKeyRef:
+              name: backbase-secret
+              key: job_scheduler.service
         ports:
         - containerPort: 3000
       imagePullSecrets:

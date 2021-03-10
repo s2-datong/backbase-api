@@ -74,8 +74,6 @@ spec:
               key: mongodb.port
         - name: MONGODB_DB
           value: "BACKBASE_DB_STAGING"
-        
-
         - name: CLOUDINARY_CLOUD_NAME
           valueFrom:
             secretKeyRef:
