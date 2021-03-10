@@ -2,7 +2,7 @@ const plaidENVs = require('plaid').environments;
 module.exports = {
     db:{
         mongo:{
-            url: 'mongodb://localhost:27017/BACKBASE',
+            url: 'mongodb://localhost:27017/BACKBASE_TEST',
             db_name: 'BACKBASE_TEST'
         }
     },
@@ -36,26 +36,26 @@ module.exports = {
         },
         storage:{
             cloudinary: {
-                cloud_name: 'dtrdr2o5x',
-                api_key: '253151647295562',
-                api_secret: 'tqZYJh2CVahXm4GdJHim0lLK8GY'
+                cloud_name: process.env.CLOUDINARY_CLOUD_NAME || '',
+                api_key: process.env.CLOUDINARY_API_KEY || '',
+                api_secret: process.env.CLOUDINARY_API_SECRET || ''
             }
         },
         payment: {
             default:'paystack',
             stripe:{
-                secret_key: 'sk_test_OjJ2N2D7RNQrhN9m6pEzImX600HBrxPlyt',
-                public_key: 'pk_test_5rTeHn1CbiBvk8r5tzLIJ6hi000mS9HryX'
+                secret_key: process.env.STRIPE_SECRET_KEY || '',
+                public_key: process.env.STRIPE_PUBLIC_KEY || ''
             },
             paystack: {
-                secret_key: '',
-                public_key: '',
+                secret_key: process.env.PAYSTACK_SECRET_KEY || '',
+                public_key: process.env.PAYSTACK_PUBLIC_KEY || '',
                 trial_days: 14
             },
             plaid: {
-                client_id: '5ea31527e3979600119f2419',
-                public_key: '6a448c831b9acaee90719a43da5db7',
-                secret: '737b115701748458fa6651ed1376d4',
+                client_id: process.env.PLAID_CLIENT_ID || '',
+                public_key: process.env.PLAID_PUBLIC_KEY || '',
+                secret: process.env.PLAID_SECRET || '',
                 environment: plaidENVs.sandbox
             }
         },
@@ -66,7 +66,7 @@ module.exports = {
             url: 'http://localhost:5700'
         },
         sentry: {
-            dsn: ''
+            dsn: process.env.SENTRY_DSN || ''
         },
         job_scheduler: {
             url: 'http://localhost:3000'
