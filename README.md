@@ -4,6 +4,7 @@ NODEJS REST API project
 ## Running Locally
 ### Clone Repository
 `git clone <repo>`
+
 `cd <clone>`
 
 ### Requirements
@@ -12,6 +13,7 @@ NODEJS REST API project
 - Make sure to update the .env if your details are different
 
 `npm install`
+
 `npm run start`
 
 ## Running with Docker Compose
@@ -34,17 +36,27 @@ Developers and engineers can then make API calls to an endpoint providing a KEY,
 
 Example
 `Given JSON context {
+
   user_id: 5,
+
   days_since_last_login: 6,
+
   last_month_total_spend: 5200
+
 }
 `
 And the Business Rule
 `
-if days_since_last_login is greater than 5 and last_month_total_spend is greater than or equal to 4000
+if days_since_last_login is greater than 5 and last_month_total_spend is 
+
+greater than or equal to 4000
+
 then 
+
 SET send_activation to true
+
 ALSO SET qualifies_for_discount to true
+
 ALSO SET max_discount to 0.2 * last_month_total_spend
 `
 
@@ -53,10 +65,15 @@ When the JSON object which is called a context is run through the Business Rules
 `
 {
   user_id: 5,
+
   days_since_last_login: 6,
+
   last_month_total_spend: 5200,
+
   send_activation: true,
+
   qualifies_for_discount: true,
+
   max_discount: 1040
 }
 `
