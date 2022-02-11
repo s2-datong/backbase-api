@@ -4,8 +4,8 @@
   "description": "Backbase backend",
   "main": "index.js",
   "scripts": {
-    "test": "SET NODE_ENV=test&& mocha --ignore test/cleardb.js& node test/cleardb.js",
-    "start": "node app/server.js"
+    "test": "NODE_ENV=test mocha --ignore test/cleardb.js & NODE_ENV=test node test/cleardb.js",
+    "start": "NODE_ENV=development node app/server.js"
   },
   "keywords": [
     "backbase"
@@ -18,6 +18,7 @@
     "body-parser": "^1.19.0",
     "cloudinary": "^1.21.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.6",
     "express-validation": "^3.0.2",

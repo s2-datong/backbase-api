@@ -1,3 +1,4 @@
+require('dotenv').config()
 const {closeDB, setupDB} = require('../app/db');
 const {RedisService} = require('../app/services');
 const Bootstrap = require('../app/controllers/Bootstrap');

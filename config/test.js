@@ -2,7 +2,7 @@ const plaidENVs = require('plaid').environments;
 module.exports = {
     db:{
         mongo:{
-            url: 'mongodb://localhost:27017/BACKBASE_TEST',
+            url: 'mongodb://127.0.0.1:27017/BACKBASE_TEST',
             db_name: 'BACKBASE_TEST'
         }
     },

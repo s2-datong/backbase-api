@@ -47,7 +47,7 @@ describe('Funding source', function(done){
                   card: {
                     number: '4242424242424242',
                     exp_month: 6,
-                    exp_year: 2021,
+                    exp_year: 2023,
                     cvc: '314',
                   },
                 }
@@ -66,7 +66,7 @@ describe('Funding source', function(done){
                   card: {
                     number: '5555555555554444',
                     exp_month: 6,
-                    exp_year: 2021,
+                    exp_year: 2023,
                     cvc: '314',
                   },
                 }

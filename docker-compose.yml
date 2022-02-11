@@ -1,0 +1,34 @@
+version: "3.2"
+services:
+  app:
+    command: node app/server.js
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+      - redis
+    environment:
+      MONGODB_HOST: mongodb
+      REDIS_URL: redis
+      NODE_ENV: development
+  mongodb:
+    image: mongo:3.6
+    restart: always
+    environment:
+      MONGO_DATA_DIR: /data/db
+      MONGO_LOG_DIR: /dev/null
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+  redis:
+    image: redis:5
+    ports:
+      - "6379:6379"
+    restart: always
+
+volumes:
+  mongo-data:
