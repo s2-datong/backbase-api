@@ -1,4 +1,11 @@
 const plaidENVs = require('plaid').environments;
+const getDBURL = () => {
+    if(process.env.MONGODB_USER && process.env.MONGODB_PASSWORD && 
+        process.env.MONGODB_USER !== '' && process.env.MONGODB_PASSWORD !== ''){
+            return `mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOST}:${process.env.MONGODB_PORT}`
+        }
+        return `mongodb://${process.env.MONGODB_HOST}:${process.env.MONGODB_PORT}`
+}
 module.exports = {
     db:{
         mongo:{

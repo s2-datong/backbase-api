@@ -2,6 +2,7 @@ const JWT = require('jsonwebtoken');
 const config = require('../../config');
 const systemUserEmail = config.app.backbase_org.admin_user.email;
 const {RedisService} = require('../services');
+const {ObjectID} = require('mongodb')
 
 module.exports = async (req, res, next) => {
     let apiKey = req.get('api-key');
@@ -58,6 +59,7 @@ module.exports = async (req, res, next) => {
         next();
     }
     catch(e){
+        console.log(e)
         if(e instanceof JWT.TokenExpiredError){
             return res.status(401).json({message: "Session has expired. Please login again"})
         }
