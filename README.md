@@ -35,51 +35,46 @@ The Project provides a large library of REST Endpoints being the primary service
 
 A few endpoints would be documented here for easy testing
 
-### Registration
-`POST /v1/account/users`
-```curl
+### Registration `POST /v1/account/users`
+```bash
 curl -H "Content-type: application/json" \
   --data '{"firstname": "Test", "lastname": "User", "email": "user001@mailinator.com", "password": "password" }' \
   -s http://localhost:3000/v1/account/users
 ```
-### Login
-`POST /v1/account/user`
-```curl
+### Login `POST /v1/account/user`
+```bash
 curl -H "Content-type: application/json" \
   --data '{"email": "user001@mailinator.com", "password": "password" }' \
   -s http://localhost:3000/v1/account/user
 ```
-### Invite a User to your organization
-`POST /v1/organization/invite/user`
-```curl
+### Invite a User to your organization `POST /v1/organization/invite/user`
+```bash
 curl -H "Content-type: application/json" \
     -H "Authorization: Bearer <JWT>" \
     --data '{"email": "user002@mailinator.com" }' \
     -s http://localhost:3000/v1/organization/invite/user
 ```
 
-`GET /v1/organization/team`
-```curl
+### List team members`GET /v1/organization/team`
+```bash
 curl -H "Content-type: application/json" \
     -H "Authorization: Bearer <JWT>" \
     -s http://localhost:3000/v1/organization/team
 ```
 
-`GET /v1/organization/settings`
-```curl
+### Get Organization Settings `GET /v1/organization/settings`
+```bash
 curl -H "Content-type: application/json" \
     -H "Authorization: Bearer <JWT>" \
     -s http://localhost:3000/v1/organization/settings
 ```
 
-`GET /v1/organization` list your organizations
-```curl
+### GET list of organizations `GET /v1/organization`
+```bash
 curl -H "Content-type: application/json" \
     -H "Authorization: Bearer <JWT>" \
     -s http://localhost:3000/v1/organization
 ```
-
-## SUMMARY
 
 ## About Project
 This API Service is part of a much larger SAAS Application micro-service ecosystem. The main application is a SAAS based Business Rules Engine which had the main value proposition of empowering the Business Teams of organizations to capture their Core Business Rules in an external cloud environment through a user friendly UI
