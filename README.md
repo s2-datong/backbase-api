@@ -43,11 +43,11 @@ Example
 
   last_month_total_spend: 5200
 
-}
-`
+}`
+
 And the Business Rule
-`
-if days_since_last_login is greater than 5 and last_month_total_spend is 
+
+`if days_since_last_login is greater than 5 and last_month_total_spend is 
 
 greater than or equal to 4000
 
@@ -57,13 +57,11 @@ SET send_activation to true
 
 ALSO SET qualifies_for_discount to true
 
-ALSO SET max_discount to 0.2 * last_month_total_spend
-`
+ALSO SET max_discount to 0.2 * last_month_total_spend`
 
 When the JSON object which is called a context is run through the Business Rules Engine, the resultant JSON object would be
 
-`
-{
+`{
   user_id: 5,
 
   days_since_last_login: 6,
@@ -75,7 +73,6 @@ When the JSON object which is called a context is run through the Business Rules
   qualifies_for_discount: true,
 
   max_discount: 1040
-}
-`
+}`
 
 This project provides the REST API that is integrated with the dashboard UI
